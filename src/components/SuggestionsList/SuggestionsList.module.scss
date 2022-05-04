@@ -1,0 +1,33 @@
+@import '../../styles/colors.scss';
+
+.suggestions {
+  position: absolute;
+  width: 100%;
+  margin-top: 8px;
+  background-color: $white;
+  color: $dark;
+  border-radius: 8px;
+  list-style: none;
+  padding: 8px 0;
+  max-height: 200px;
+  overflow-y: scroll;
+  li {
+    padding: 16px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary;
+    }
+  }
+}
+.noSuggestions {
+  position: absolute;
+  width: 100%;
+  margin-top: 8px;
+  background-color: $white;
+  color: $grey;
+  border-radius: 8px;
+  padding: 24px 16px;
+  max-height: 200px;
+}

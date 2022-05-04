@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import SearchIcon from '../Svgs/SearchIcon';
 import { useSingleSearchQuery } from '../../hooks/queries/useSingleSearch';
 import { useCustomContext } from '../../CustomContextProvider';
+import SuggestionsList from '../SuggestionsList/SuggestionsList';
 
 import styles from './SearchParent.module.scss';
+
 const SearchParent = () => {
-  const navigate = useNavigate();
   const { entityDataToFetch } = useCustomContext();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<Array<string>>([]);
@@ -20,15 +20,15 @@ const SearchParent = () => {
     }
   }, [data]);
 
-  const handleSearch = async (e: any) => {
+  const handleClick = (e: { target: { innerText: any } }) => {
+    setSearchValue(e.target.innerText);
+    setShowSuggestions(false);
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchValue(value);
     setShowSuggestions(true);
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    navigate(`${searchValue}`);
   };
 
   return (
@@ -41,10 +41,17 @@ const SearchParent = () => {
           onChange={handleSearch}
           value={searchValue}
         />
-        <div className={styles.searchIcon} onClick={handleSubmit}>
+        <div className={styles.searchIcon}>
           <SearchIcon />
         </div>
       </div>
+      {showSuggestions && searchValue && (
+        <SuggestionsList
+          filteredSuggestions={suggestions}
+          activeSuggestionIndex={0}
+          onClick={handleClick}
+        />
+      )}
     </div>
   );
 };
