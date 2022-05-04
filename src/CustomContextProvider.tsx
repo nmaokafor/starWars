@@ -10,6 +10,18 @@ interface ContextProviderProps {
   children: React.ReactNode;
 }
 
+type DataSetsType = {
+  id?: number;
+  label?: string | number | undefined;
+  data?: Array<number> | number | undefined;
+  backgroundColor?: string | undefined;
+};
+
+type BarChartData = {
+  labels: Array<string>;
+  datasets: Array<DataSetsType>;
+};
+
 interface CustomContextType {
   userName: string;
   setUserDetails: (isAuthenticated: string) => void;
@@ -20,6 +32,8 @@ interface CustomContextType {
   setSearchResultsArray: (searchResultsArray: any) => void;
   fetchWithWookiee: boolean;
   setFetchWithWookiee: (fetchWithWookiee: boolean) => void;
+  barChartData: any;
+  setBarChartData: (barChartData: any) => void;
 }
 
 // context
@@ -33,6 +47,11 @@ export const CustomContext = createContext<CustomContextType>({
   setSearchResultsArray: (searchResultsArray: any) => searchResultsArray,
   fetchWithWookiee: false,
   setFetchWithWookiee: (fetchWithWookiee: boolean) => fetchWithWookiee,
+  barChartData: {
+    labels: [],
+    datasets: [],
+  },
+  setBarChartData: (barChartData: BarChartData) => barChartData,
 });
 
 export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
@@ -42,6 +61,10 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
   const [entityDataToFetch, setEntityDataToFetch] = useState<string>('People');
   const [searchResultsArray, setSearchResultsArray] = useState([]);
   const [fetchWithWookiee, setFetchWithWookiee] = useState<boolean>(false);
+  const [barChartData, setBarChartData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
   useEffect(() => {
     const user = localStorage.getItem('userName');
@@ -74,6 +97,8 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
         setSearchResultsArray,
         fetchWithWookiee,
         setFetchWithWookiee,
+        barChartData,
+        setBarChartData,
       }}
     >
       {children}

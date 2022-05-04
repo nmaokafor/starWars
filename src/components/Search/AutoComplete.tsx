@@ -1,13 +1,16 @@
+import React, { FunctionComponent } from 'react';
 import { useEffect, useState } from 'react';
 import SearchIcon from '../Svgs/SearchIcon';
 import { useSingleSearchQuery } from '../../hooks/queries/useSingleSearch';
 import { useCustomContext } from '../../CustomContextProvider';
 import SuggestionsList from '../SuggestionsList/SuggestionsList';
 
-import styles from './SearchParent.module.scss';
+import styles from './AutoComplete.module.scss';
+import { extractBarChartData } from '../../helpers/utils';
 
-const SearchParent = () => {
-  const { entityDataToFetch } = useCustomContext();
+const AutoComplete: FunctionComponent = React.memo(() => {
+  const { entityDataToFetch, fetchWithWookiee, setBarChartData } =
+    useCustomContext();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<Array<string>>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -15,12 +18,21 @@ const SearchParent = () => {
   const { data } = useSingleSearchQuery(searchValue);
 
   useEffect(() => {
-    if (data && data?.arrayOfNames && data.searchResultsArray) {
-      setSuggestions(data.arrayOfNames);
+    if (
+      (data && data?.arrayOfNames && data.searchResultsArray) ||
+      (data && data?.arrayOfWookieNames)
+    ) {
+      setSuggestions(data.arrayOfNames || data.arrayOfWookieNames);
+
+      const extractedBarChartData = extractBarChartData(
+        data.searchResultsArray,
+        entityDataToFetch,
+        fetchWithWookiee,
+      );
+
+      setBarChartData(extractedBarChartData);
     }
-    if (data && data?.arrayOfWookieNames) {
-      setSuggestions(data.arrayOfWookieNames);
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const handleClick = (e: { target: { innerText: any } }) => {
@@ -57,6 +69,6 @@ const SearchParent = () => {
       )}
     </div>
   );
-};
+});
 
-export default SearchParent;
+export default AutoComplete;

@@ -4,7 +4,7 @@ import Button from '../../components/CustomElements/CustomButton/CustomButton';
 import CustomInputFields from '../../components/CustomElements/CustomInputFields';
 import { useLogin } from '../../hooks/queries/useLogin';
 
-import './LoginPage.modules.scss';
+import styles from './LoginPage.module.scss';
 
 type Result = {
   name: string;
@@ -95,7 +95,7 @@ const Login = () => {
       <h1 className="text-h1 mb-16">Login</h1>
 
       {loginErrorMessage && (
-        <p className="text-caption login-error">{loginErrorMessage}</p>
+        <p className={`text-caption ${styles.error}`}>{loginErrorMessage}</p>
       )}
       <CustomInputFields
         fieldType="text"

@@ -1,21 +1,21 @@
 import EntitySelector from '../../components/EntitySelector';
 import Logo from '../../assets/images/logo.png';
-import SearchParent from '../../components/Search/SearchParent';
-import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
+import AutoComplete from '../../components/Search/AutoComplete';
+import ToggleSwitch from '../../components/Toggle/Toggle';
+import SearchResults from '../../components/Search/SearchResults';
 
-const SearchPage = () => {
+const SearchPage: React.FunctionComponent = () => {
   return (
     <div className="container py-40">
       <img src={Logo} alt="star wars" className="home-image" />
       <div className="search-wrapper mb-40">
         <ToggleSwitch />
-        <div className="search-wrapper mb-40">
-          <div className="d-flex">
-            <EntitySelector />
-            <SearchParent />
-          </div>
+        <div className="d-flex">
+          <EntitySelector />
+          <AutoComplete />
         </div>
       </div>
+      <SearchResults />
     </div>
   );
 };

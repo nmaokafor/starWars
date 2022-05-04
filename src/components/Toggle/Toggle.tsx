@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useCustomContext } from '../../CustomContextProvider';
-import styles from './ToggleSwitch.module.scss';
+import styles from './Toggle.module.scss';
 
-const ToggleSwitch = React.memo(() => {
+const Toggle: FunctionComponent = React.memo(() => {
   const { fetchWithWookiee, setFetchWithWookiee } = useCustomContext();
 
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,4 +21,4 @@ const ToggleSwitch = React.memo(() => {
   );
 });
 
-export default ToggleSwitch;
+export default Toggle;

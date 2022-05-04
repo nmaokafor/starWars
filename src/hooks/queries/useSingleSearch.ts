@@ -2,16 +2,7 @@ import { BASE_URL } from '../../apis/apiConstants';
 import { axiosInstance } from '../../apis/apiMethods';
 import { useQuery } from 'react-query';
 import { useCustomContext } from '../../CustomContextProvider';
-
-type PeopleType = {
-  name: string;
-  fetchWithWookiee: boolean;
-};
-
-type WookiePeopleType = {
-  whrascwo: string;
-  fetchWithWookiee: boolean;
-};
+import { convertArrayOfDataToArrayOfNames } from '../../helpers/utils';
 
 const querySearchEndpoint = async (
   url: string,
@@ -103,23 +94,4 @@ export const useSingleSearchQuery = (searchValue: string) => {
       keepPreviousData: true,
     },
   );
-};
-
-export const convertArrayOfDataToArrayOfNames = (
-  data: any,
-  fetchWithWookiee: boolean,
-) => {
-  let finalArrayOfNames: Array<string> = [];
-
-  if (data && !fetchWithWookiee) {
-    data?.forEach((result: PeopleType) => {
-      return finalArrayOfNames.push(result.name);
-    });
-  } else if (data && fetchWithWookiee) {
-    data?.forEach((result: WookiePeopleType) => {
-      return finalArrayOfNames.push(result.whrascwo);
-    });
-  }
-
-  return finalArrayOfNames;
 };
