@@ -14,6 +14,8 @@ interface CustomContextType {
   userName: string;
   setUserDetails: (isAuthenticated: string) => void;
   logOut: () => void;
+  entityDataToFetch: string;
+  setEntityDataToFetch: (entityDataToFetch: string) => void;
 }
 
 // context
@@ -21,12 +23,15 @@ export const CustomContext = createContext<CustomContextType>({
   userName: '',
   setUserDetails: (userName: string) => userName,
   logOut: () => null,
+  entityDataToFetch: 'People',
+  setEntityDataToFetch: (entityDataToFetch: string) => entityDataToFetch,
 });
 
 export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
   children,
 }) => {
   const [userName, setUserName] = useState<string>('');
+  const [entityDataToFetch, setEntityDataToFetch] = useState<string>('People');
 
   useEffect(() => {
     const user = localStorage.getItem('userName');
@@ -53,6 +58,8 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
         userName,
         setUserDetails,
         logOut,
+        entityDataToFetch,
+        setEntityDataToFetch,
       }}
     >
       {children}

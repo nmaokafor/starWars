@@ -138,11 +138,13 @@
     margin: 0;
   }
 }
+
 @media (min-width: 1204px) {
   .container {
     max-width: 1140px;
   }
 }
+
 button,
 input,
 optgroup,
@@ -198,6 +200,7 @@ input[type='search']::-webkit-search-decoration {
 [role='button'] {
   cursor: pointer;
 }
+
 .text-field {
   padding: 1rem 1.2rem;
   font-size: 16px;
@@ -216,5 +219,27 @@ input[type='search']::-webkit-search-decoration {
   }
   &.left-attached {
     border-radius: 0px 8px 8px 0px;
+  }
+}
+
+.select-field {
+  padding: 0.9rem 1.2rem;
+  font-size: 16px;
+  color: $dark;
+  border: 2px solid $primary;
+  border-radius: 8px;
+  background-color: $primary;
+
+  &.left-attached {
+    border-radius: 8px 0 0 8px;
+    border-right-width: 4px;
+  }
+  &:focus-visible {
+    border-color: $primary;
+    outline: none;
+  }
+  &.block {
+    display: block;
+    width: 100%;
   }
 }

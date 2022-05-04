@@ -14,7 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginParent />}></Route>
             <Route path="/view-star-wars-universe" element={<MainNavigation />}>
-              <Route index element={<SearchPage />}></Route>
+              <Route index element={<SearchPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
