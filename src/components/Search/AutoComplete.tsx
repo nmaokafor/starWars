@@ -42,6 +42,9 @@ const AutoComplete: FunctionComponent = React.memo(() => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    if (!value) {
+      setBarChartData({});
+    }
     setSearchValue(value);
     setShowSuggestions(true);
   };
