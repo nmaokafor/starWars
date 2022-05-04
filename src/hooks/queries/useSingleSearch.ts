@@ -65,10 +65,7 @@ export const useSingleSearchQuery = (searchValue: string) => {
   } = useCustomContext();
 
   return useQuery(
-    [
-      'searchQuery',
-      { searchValue, entityDataToFetch, searchResultsArray, fetchWithWookiee },
-    ],
+    ['searchQuery', { searchValue, entityDataToFetch, fetchWithWookiee }],
     async () => {
       const entity = entityDataToFetch.toLowerCase();
       let arrayOfNames: string[] = [];
