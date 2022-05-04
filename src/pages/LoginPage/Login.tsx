@@ -4,7 +4,7 @@ import Button from '../../components/CustomElements/CustomButton/CustomButton';
 import CustomInputFields from '../../components/CustomElements/CustomInputFields';
 import { useLogin } from '../../hooks/queries/useLogin';
 
-import './Home.modules.scss';
+import './LoginPage.modules.scss';
 
 type Result = {
   name: string;
