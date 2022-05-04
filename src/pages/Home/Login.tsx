@@ -1,17 +1,18 @@
 import React, { useState, useCallback, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/CustomElements/CustomButton/CustomButton';
 import CustomInputFields from '../../components/CustomElements/CustomInputFields';
 import { useLogin } from '../../hooks/queries/useLogin';
 
-type LoginQueryResponseProps = {
+type Result = {
   name: string;
   birth_year: string;
 };
 
-type LoginQueryProps = Array<LoginQueryResponseProps>;
+type LoginQueryProps = Array<Result>;
 
 const Login = () => {
+  const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState('password');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
@@ -33,20 +34,21 @@ const Login = () => {
   const authenticateUser = useCallback(
     (loginDetails: LoginQueryProps) => {
       const findValidLoginDetails = loginDetails.find(
-        (details: LoginQueryResponseProps) =>
+        (details: Result) =>
           details.name.toLowerCase() === formValues.username.toLowerCase() &&
           details.birth_year === formValues.password,
       );
 
       if (findValidLoginDetails) {
         localStorage.setItem('userName', formValues.username);
+        navigate('/view-star-wars-universe');
       } else {
         setLoginErrorMessage(
           'The combination of username and password is wrong',
         );
       }
     },
-    [formValues],
+    [formValues, navigate],
   );
 
   useEffect(() => {
