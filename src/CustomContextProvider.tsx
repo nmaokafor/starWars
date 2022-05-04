@@ -18,6 +18,8 @@ interface CustomContextType {
   setEntityDataToFetch: (entityDataToFetch: string) => void;
   searchResultsArray: any[];
   setSearchResultsArray: (searchResultsArray: any) => void;
+  fetchWithWookiee: boolean;
+  setFetchWithWookiee: (fetchWithWookiee: boolean) => void;
 }
 
 // context
@@ -29,6 +31,8 @@ export const CustomContext = createContext<CustomContextType>({
   setEntityDataToFetch: (entityDataToFetch: string) => entityDataToFetch,
   searchResultsArray: [],
   setSearchResultsArray: (searchResultsArray: any) => searchResultsArray,
+  fetchWithWookiee: false,
+  setFetchWithWookiee: (fetchWithWookiee: boolean) => fetchWithWookiee,
 });
 
 export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
@@ -37,6 +41,7 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
   const [userName, setUserName] = useState<string>('');
   const [entityDataToFetch, setEntityDataToFetch] = useState<string>('People');
   const [searchResultsArray, setSearchResultsArray] = useState([]);
+  const [fetchWithWookiee, setFetchWithWookiee] = useState<boolean>(false);
 
   useEffect(() => {
     const user = localStorage.getItem('userName');
@@ -67,6 +72,8 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
         setEntityDataToFetch,
         searchResultsArray,
         setSearchResultsArray,
+        fetchWithWookiee,
+        setFetchWithWookiee,
       }}
     >
       {children}

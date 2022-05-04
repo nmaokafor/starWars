@@ -18,6 +18,9 @@ const SearchParent = () => {
     if (data && data?.arrayOfNames && data.searchResultsArray) {
       setSuggestions(data.arrayOfNames);
     }
+    if (data && data?.arrayOfWookieNames) {
+      setSuggestions(data.arrayOfWookieNames);
+    }
   }, [data]);
 
   const handleClick = (e: { target: { innerText: any } }) => {
