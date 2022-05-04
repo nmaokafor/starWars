@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import Logout from '../../components/Shared/Logout/Logout';
 import '../../App.scss';
+import DefaultLayout from '../../layouts/DefaultLayout';
 
 const MainNavigation = () => {
   return (
-    <div>
+    <DefaultLayout>
       <Logout />
       <Outlet />
-    </div>
+    </DefaultLayout>
   );
 };
 
