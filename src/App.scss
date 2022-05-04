@@ -28,6 +28,12 @@
   background-position: center center;
 }
 
+.stars-background {
+  background-color: $dark;
+  background-image: url('./assets/images/stars.jpeg');
+  background-repeat: repeat-x;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
