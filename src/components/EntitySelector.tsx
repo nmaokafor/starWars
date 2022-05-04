@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useCustomContext } from '../CustomContextProvider';
 
 const EntitySelector = React.memo(() => {
