@@ -1,0 +1,32 @@
+@import '../../styles/colors.scss';
+
+.autocomplete {
+  width: 100%;
+  position: relative;
+
+  .search {
+    display: flex;
+    border: 2px solid $white;
+    padding-right: 1.2rem;
+    border-radius: 0px 8px 8px 0px;
+    border-left-style: hidden;
+    &:focus-within {
+      border-color: $primary;
+      outline: none;
+    }
+    input {
+      border: 0;
+    }
+    .searchIcon {
+      display: grid;
+      place-items: center;
+      svg {
+        width: 20px;
+        cursor: pointer;
+        &:hover {
+          fill: $primary;
+        }
+      }
+    }
+  }
+}

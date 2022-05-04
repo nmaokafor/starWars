@@ -16,6 +16,8 @@ interface CustomContextType {
   logOut: () => void;
   entityDataToFetch: string;
   setEntityDataToFetch: (entityDataToFetch: string) => void;
+  searchResultsArray: any[];
+  setSearchResultsArray: (searchResultsArray: any) => void;
 }
 
 // context
@@ -25,6 +27,8 @@ export const CustomContext = createContext<CustomContextType>({
   logOut: () => null,
   entityDataToFetch: 'People',
   setEntityDataToFetch: (entityDataToFetch: string) => entityDataToFetch,
+  searchResultsArray: [],
+  setSearchResultsArray: (searchResultsArray: any) => searchResultsArray,
 });
 
 export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
@@ -32,6 +36,7 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
 }) => {
   const [userName, setUserName] = useState<string>('');
   const [entityDataToFetch, setEntityDataToFetch] = useState<string>('People');
+  const [searchResultsArray, setSearchResultsArray] = useState([]);
 
   useEffect(() => {
     const user = localStorage.getItem('userName');
@@ -60,6 +65,8 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
         logOut,
         entityDataToFetch,
         setEntityDataToFetch,
+        searchResultsArray,
+        setSearchResultsArray,
       }}
     >
       {children}

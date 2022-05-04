@@ -1,5 +1,6 @@
 import EntitySelector from '../../components/EntitySelector';
 import Logo from '../../assets/images/logo.png';
+import SearchParent from '../../components/Search/SearchParent';
 
 const SearchPage = () => {
   return (
@@ -9,6 +10,7 @@ const SearchPage = () => {
       <div className="search-wrapper mb-40">
         <div className="d-flex">
           <EntitySelector />
+          <SearchParent />
         </div>
       </div>
     </div>
