@@ -113,9 +113,9 @@ const Login = () => {
         placeholder="********"
         leftIcon={
           passwordType === 'password' ? (
-            <i className="ri-lock-unlock-line ri-lg"></i>
-          ) : (
             <i className="ri-lock-line ri-lg"></i>
+          ) : (
+            <i className="ri-lock-unlock-line ri-lg"></i>
           )
         }
         onClickLeftIcon={togglePasswordField}
