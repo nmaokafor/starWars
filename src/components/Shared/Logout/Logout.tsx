@@ -6,7 +6,7 @@ const Logout = () => {
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    localStorage.removeItem('isUserAuthenticated');
+    localStorage.removeItem('userName');
     navigate('/');
   };
   return (
