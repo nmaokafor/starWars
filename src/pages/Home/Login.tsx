@@ -4,6 +4,8 @@ import Button from '../../components/CustomElements/CustomButton/CustomButton';
 import CustomInputFields from '../../components/CustomElements/CustomInputFields';
 import { useLogin } from '../../hooks/queries/useLogin';
 
+import './Home.modules.scss';
+
 type Result = {
   name: string;
   birth_year: string;
@@ -91,6 +93,10 @@ const Login = () => {
   return (
     <div className="login-form">
       <h1 className="text-h1 mb-16">Login</h1>
+
+      {loginErrorMessage && (
+        <p className="text-caption login-error">{loginErrorMessage}</p>
+      )}
       <CustomInputFields
         fieldType="text"
         name="username"
