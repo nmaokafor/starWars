@@ -20,6 +20,14 @@
   }
 }
 
+// Authentication Layout
+.auth-image {
+  background-color: $dark;
+  background-image: url('./assets/images/auth-image.jpeg');
+  background-size: cover;
+  background-position: center center;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

@@ -3,14 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'remixicon/fonts/remixicon.css';
+import { CustomProvider } from './CustomContextProvider';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const client = new QueryClient();
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <CustomProvider>
+      <QueryClientProvider client={client}>
+        <App />
+      </QueryClientProvider>
+    </CustomProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
