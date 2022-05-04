@@ -4,10 +4,6 @@ import { useCustomContext } from '../CustomContextProvider';
 const EntitySelector = React.memo(() => {
   const { entityDataToFetch, setEntityDataToFetch } = useCustomContext();
 
-  useEffect(() => {
-    console.log('entityDataToFetch', entityDataToFetch);
-  }, [entityDataToFetch]);
-
   const handleChange = (e: { target: { value: any } }) => {
     const { value } = e.target;
     setEntityDataToFetch(value);
