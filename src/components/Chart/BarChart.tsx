@@ -25,7 +25,7 @@ const BarChart: FunctionComponent = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,
@@ -38,7 +38,7 @@ const BarChart: FunctionComponent = () => {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div style={{ position: 'relative', width: '100%', height: '50vh' }}>
       {barChartData.labels?.length > 0 ? (
         <Bar options={options} data={barChartData} />
       ) : (
