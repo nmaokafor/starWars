@@ -49,6 +49,10 @@ const AutoComplete: FunctionComponent = React.memo(() => {
     setShowSuggestions(true);
   };
 
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowSuggestions(false);
+  };
+
   return (
     <div className={`${styles.autocomplete}`}>
       <div className={styles.search}>
@@ -58,6 +62,7 @@ const AutoComplete: FunctionComponent = React.memo(() => {
           type="search"
           onChange={handleSearch}
           value={searchValue}
+          onBlur={handleBlur}
         />
         <div className={styles.searchIcon}>
           <SearchIcon />
