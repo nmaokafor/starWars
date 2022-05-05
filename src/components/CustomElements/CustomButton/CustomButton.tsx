@@ -1,15 +1,19 @@
+import Spinner from '../../Spinner/Spinner';
 import styles from './CustomButton.module.scss';
 
 const Button = (props: any) => {
-  const { children, onClick, disabled } = props;
+  const { children, onClick, disabled, text, loading } = props;
 
   return (
     <button
-      className={`${styles.button} text-button`}
-      disabled={disabled}
+      className={`${styles.button}
+        ${text ? styles.text : ''}
+        ${disabled ? styles.disabled : ''} 
+        text-button`}
+      disabled={disabled || loading}
       onClick={onClick}
     >
-      {children}
+      {loading ? <Spinner /> : children}
     </button>
   );
 };

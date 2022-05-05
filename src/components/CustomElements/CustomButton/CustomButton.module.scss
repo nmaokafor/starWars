@@ -7,4 +7,24 @@
   border: 2px solid $primary;
   color: $dark;
   cursor: pointer;
+  transition: background-color 0.4s, border-color 0.6s;
+  &:hover {
+    background-color: $secondary;
+    border: 2px solid $secondary;
+  }
+
+  &.disabled {
+    background-color: $grey;
+    color: #4d4d4d;
+    border: unset;
+  }
+  &.text {
+    background-color: unset;
+    border: unset;
+    color: $primary;
+    &:hover {
+      color: $secondary;
+      background-color: rgba($color: $primary, $alpha: 0.1);
+    }
+  }
 }
