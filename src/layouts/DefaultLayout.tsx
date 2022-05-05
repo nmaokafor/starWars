@@ -17,7 +17,7 @@ const DefaultLayout = ({ children }: PropsChildren) => {
   }, [window.location.href]);
   return (
     <>
-      <div className="stars-background">{children}</div>
+      <div className="stars-background fill-height">{children}</div>
     </>
   );
 };

@@ -6,7 +6,7 @@ import SearchResults from '../../components/Search/SearchResults';
 
 const SearchPage: React.FunctionComponent = () => {
   return (
-    <div className="container py-40">
+    <div className="container pb-40">
       <img src={Logo} alt="star wars" className="home-image" />
       <div className="search-wrapper mb-40">
         <ToggleSwitch />

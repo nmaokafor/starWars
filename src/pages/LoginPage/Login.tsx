@@ -120,7 +120,7 @@ const Login = () => {
         }
         onClickLeftIcon={togglePasswordField}
       />
-      <Button onClick={handleSubmit} disabled={!validForm || isLoading}>
+      <Button onClick={handleSubmit} loading={isLoading} disabled={!validForm}>
         Submit
       </Button>
     </div>

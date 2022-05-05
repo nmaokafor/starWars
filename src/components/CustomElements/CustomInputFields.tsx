@@ -1,4 +1,5 @@
 import React, { ReactElement, FunctionComponent } from 'react';
+import styles from './CustomInputFields.module.scss';
 
 type Props = {
   fieldType: string;
@@ -20,10 +21,10 @@ const CustomInputFields: FunctionComponent<Props> = ({
   onClickLeftIcon,
 }) => {
   return (
-    <div className="input-group">
+    <div className={styles.textfieldGroup}>
       {leftIcon && (
         <span
-          className="input-group-text cursor-pointer px-3 "
+          className={`${styles.icon} cursor-pointer px-3`}
           onClick={onClickLeftIcon && onClickLeftIcon}
         >
           {leftIcon}

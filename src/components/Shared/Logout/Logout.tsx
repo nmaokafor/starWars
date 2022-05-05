@@ -10,8 +10,10 @@ const Logout = () => {
     navigate('/');
   };
   return (
-    <div>
-      <Button onClick={handleClick}>Logout</Button>
+    <div className="pa-16 text-right">
+      <Button text onClick={handleClick}>
+        Logout
+      </Button>
     </div>
   );
 };

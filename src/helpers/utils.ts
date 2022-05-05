@@ -153,7 +153,7 @@ export const extractBarChartData = (
         id: 2,
         label: labelName[1],
         data: chartDataField[1],
-        backgroundColor: 'red',
+        backgroundColor: '#d86b30',
       },
     ],
   };

@@ -1,7 +1,9 @@
 .text-center {
   text-align: center;
 }
-
+.text-right {
+  text-align: right;
+}
 .fill-height {
   height: 100%;
 }
@@ -43,6 +45,11 @@
   margin: 24px;
 }
 
+.my-40 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
 .mr-8 {
   margin-right: 8px;
 }
@@ -78,6 +85,11 @@
 
 .pa-24 {
   padding: 24px;
+}
+
+.px-16 {
+  padding-right: 16px !important;
+  padding-left: 16px !important;
 }
 
 .px-24 {
