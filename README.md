@@ -35,6 +35,8 @@ I chose to implement usning **Option 2** for the following reasons:
 As with every generic api, there were some unforseen issues. The most notable being that the Wookie collection returns a string value, which when converted to JSON is **invalid**. The invalid part of the string text is a field which refers to `null`.
 As a first line of solution, this was handled using a global replace for the `whhuanan` value and no recursive call.
 
+I should also mention that for a larger api collection, recursively calling the endpoint is not the best course of action because the collection could be very large and this could take a really long time. It could also slow down the application and UX. However, for the purpose of this assignment, I chose to do this.
+
 # Getting Started with this Application
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
