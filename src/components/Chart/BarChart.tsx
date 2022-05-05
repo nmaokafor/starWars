@@ -39,7 +39,13 @@ const BarChart: FunctionComponent = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%' }}>
-      <Bar options={options} data={barChartData} />
+      {barChartData.labels?.length > 0 ? (
+        <Bar options={options} data={barChartData} />
+      ) : (
+        <h3 className="text-body text-center my-40 primary--text">
+          Chart will show here..
+        </h3>
+      )}
     </div>
   );
 };
