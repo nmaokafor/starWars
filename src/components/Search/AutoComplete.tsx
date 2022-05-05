@@ -6,11 +6,18 @@ import { useCustomContext } from '../../CustomContextProvider';
 import SuggestionsList from '../SuggestionsList/SuggestionsList';
 
 import styles from './AutoComplete.module.scss';
-import { extractBarChartData } from '../../helpers/utils';
+import {
+  convertArrayOfDataToArrayOfNames,
+  extractBarChartData,
+} from '../../helpers/utils';
 
 const AutoComplete: FunctionComponent = React.memo(() => {
-  const { entityDataToFetch, fetchWithWookiee, setBarChartData } =
-    useCustomContext();
+  const {
+    entityDataToFetch,
+    fetchWithWookiee,
+    setBarChartData,
+    searchResultsArray,
+  } = useCustomContext();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<Array<string>>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -18,22 +25,25 @@ const AutoComplete: FunctionComponent = React.memo(() => {
   const { data } = useSingleSearchQuery(searchValue);
 
   useEffect(() => {
-    if (
-      (data && data?.arrayOfNames && data.searchResultsArray) ||
-      (data && data?.arrayOfWookieNames)
-    ) {
-      setSuggestions(data.arrayOfNames || data.arrayOfWookieNames);
-
+    if (searchResultsArray.length && searchValue) {
       const extractedBarChartData = extractBarChartData(
-        data.searchResultsArray,
+        searchResultsArray,
         entityDataToFetch,
         fetchWithWookiee,
       );
+      const arrayOfNames = convertArrayOfDataToArrayOfNames(
+        searchResultsArray,
+        fetchWithWookiee,
+      );
 
+      setSuggestions(arrayOfNames);
       setBarChartData(extractedBarChartData);
+    } else {
+      setSuggestions([]);
+      setBarChartData({});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [searchResultsArray, data, searchValue]);
 
   const handleClick = (e: { target: { innerText: any } }) => {
     setSearchValue(e.target.innerText);
@@ -42,9 +52,6 @@ const AutoComplete: FunctionComponent = React.memo(() => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!value) {
-      setBarChartData({});
-    }
     setSearchValue(value);
     setShowSuggestions(true);
   };

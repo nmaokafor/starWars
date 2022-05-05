@@ -2,17 +2,14 @@ import { BASE_URL } from '../../apis/apiConstants';
 import { axiosInstance } from '../../apis/apiMethods';
 import { useQuery } from 'react-query';
 import { useCustomContext } from '../../CustomContextProvider';
-import { convertArrayOfDataToArrayOfNames } from '../../helpers/utils';
 
 const querySearchEndpoint = async (
   url: string,
   arrayOfResults: any[],
   setSearchResultsArray: {
     (searchResultsArray: any): void;
-    (arg0: any[]): void;
   },
 ) => {
-  //    is it okay to pass custom hook here from the parent?
   const { data } = await axiosInstance({
     method: 'GET',
     url,
@@ -25,13 +22,19 @@ const querySearchEndpoint = async (
     }
   }
 
-  if (data && !data.next) {
+  if (data && !data?.next) {
     setSearchResultsArray(arrayOfResults);
     return arrayOfResults;
   }
 };
 
-const querySearchForWookie = async (url: string, arrayOfResults: any[]) => {
+const querySearchForWookie = async (
+  url: string,
+  arrayOfResults: any[],
+  setSearchResultsArray: {
+    (searchResultsArray: any): void;
+  },
+) => {
   const { data } = await axiosInstance({
     method: 'GET',
     url,
@@ -43,49 +46,31 @@ const querySearchForWookie = async (url: string, arrayOfResults: any[]) => {
 
     arrayOfResults = [...arrayOfResults].concat(parsedResponse.rcwochuanaoc);
   }
-
+  setSearchResultsArray(arrayOfResults);
   return arrayOfResults;
 };
 
 export const useSingleSearchQuery = (searchValue: string) => {
-  const {
-    entityDataToFetch,
-    searchResultsArray,
-    setSearchResultsArray,
-    fetchWithWookiee,
-  } = useCustomContext();
+  const { entityDataToFetch, setSearchResultsArray, fetchWithWookiee } =
+    useCustomContext();
 
   return useQuery(
     ['searchQuery', { searchValue, entityDataToFetch, fetchWithWookiee }],
     async () => {
       const entity = entityDataToFetch.toLowerCase();
-      let arrayOfNames: string[] = [];
-      let arrayOfWookieNames: string[] = [];
 
       if (!fetchWithWookiee) {
-        await querySearchEndpoint(
+        return await querySearchEndpoint(
           `${BASE_URL}${entity}/?search=${searchValue}`,
           [],
           setSearchResultsArray,
         );
-
-        if (searchResultsArray) {
-          arrayOfNames = convertArrayOfDataToArrayOfNames(
-            searchResultsArray,
-            fetchWithWookiee,
-          );
-          return { arrayOfNames, searchResultsArray };
-        }
-      } else if (fetchWithWookiee) {
-        const searchResultsArray = await querySearchForWookie(
+      } else {
+        return await querySearchForWookie(
           `${BASE_URL}${entity}/?search=${searchValue}&format=wookiee`,
           [],
+          setSearchResultsArray,
         );
-        arrayOfWookieNames = convertArrayOfDataToArrayOfNames(
-          searchResultsArray,
-          fetchWithWookiee,
-        );
-        return { arrayOfWookieNames, searchResultsArray };
       }
     },
     {
