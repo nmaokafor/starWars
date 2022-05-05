@@ -1,6 +1,6 @@
 import styles from './Spinner.module.scss';
 
-const Spinner = (props: any) => {
+const Spinner = () => {
   return (
     <div className={styles.spinner}>
       <div className={styles.bounce1}></div>

@@ -229,6 +229,7 @@ input[type='search']::-webkit-search-decoration {
   border: 2px solid $primary;
   border-radius: 8px;
   background-color: $primary;
+  cursor: pointer;
 
   &.left-attached {
     border-radius: 8px 0 0 8px;

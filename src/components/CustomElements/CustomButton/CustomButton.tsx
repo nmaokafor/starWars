@@ -1,7 +1,14 @@
 import Spinner from '../../Spinner/Spinner';
 import styles from './CustomButton.module.scss';
 
-const Button = (props: any) => {
+type Props = {
+  children: string;
+  onClick: any;
+  disabled?: boolean;
+  text?: boolean;
+  loading?: boolean;
+};
+const Button = (props: Props) => {
   const { children, onClick, disabled, text, loading } = props;
 
   return (
