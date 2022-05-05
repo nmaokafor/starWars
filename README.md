@@ -1,23 +1,68 @@
-# Getting Started with Create React App
+# About this Project
+
+This project was built with **_React_**, **_Typescript_** and **_Sass_** for UI Components.
+
+State management was handled with **_Context Api_** and React hooks.
+
+Data Fetching was handled using **_[React-Query](https://react-query.tanstack.com/)_** library.
+
+The base url for all the api calls made in this project is https://swapi.dev/api/
+
+#### **The goals are**
+
+1. To create an app protected by username and password
+2. To allow users search through the following collections: /people, /planets, /species.
+3. To display the search results in a bar chart showing comparisons between different datasets.
+4. Allow users to fetch with wookiee encoding.
+
+### **Implementation method and why**
+
+During the planning/design stage of this project, it was observed there is no endpoint to do a global search on all the collections at once. It was also observed that the data is paginated by default, hence each collection returns a maximum of 10 records at a time. This presented two options:
+
+1. To recursively query all 3 collections at once and display results for the different collections at the same time in the bar chart OR to display 3 different barcharts with data for each collection.
+2. To give users an option to choose which collection to query. A recursive call is made to get all the values, and the barchart only displays results for one collection at a time.
+
+I chose to implement usning **Option 2** for the following reasons:
+
+1. Recursively querying the 3 collections at a time was bound to get very expensive and possibly give room for errors.
+2. Displaying the result for all 3 at once did not make sense because a bar chart is supposed to be a graphical collection of similar sets of data. Each collection has different fields that needs to be visualized (e.g height for People collection, population for Planets collection and Average Height for Species).
+3. Still on results visualization, there is also the issue where the range between the different fields are very high, hence the barchart doesn't display useful data. E.g population of planets returns 2,000,000 while height returns 172; this scenario results in the height bars looking non-existent.
+4. For a better user experience, it also makes sense to separate each search for better understanding and an overall clean experience.
+5. On the side of development, manipulating the data between those 3 collections (with different fields names) and wookiee collections (also with different field names) became too complicated.
+
+### **Code Gotchas**
+
+As with every generic api, there were some unforseen issues. The most notable being that the Wookie collection returns a string value, which when converted to JSON is **invalid**. The invalid part of the string text is a field which refers to `null`.
+As a first line of solution, this was handled using a global replace for the `whhuanan` value and no recursive call.
+
+# Getting Started with this Application
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Starting up this application
 
-In the project directory, you can run:
+Clone this repository into your local directory using the git clone link at the top right of the page e.g git clone https://username@bitbucket.org/pvh-assignment/assignment-nmaokafo.git
+
+After cloning this app, change directory into the project directory using this command
+
+### `cd assignment-nmaokafo`
+
+Once inside the project directory install all packages using
+
+### `npm install`
+
+this will create a node_modules folder in the root of the application.
+
+Now to launch the app, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. Happy searching.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Additional Information
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To build the application, use this command
 
 ### `npm run build`
 
@@ -25,22 +70,5 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
