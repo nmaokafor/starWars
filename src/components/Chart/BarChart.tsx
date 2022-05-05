@@ -21,7 +21,7 @@ ChartJS.register(
 );
 
 const BarChart: FunctionComponent = () => {
-  const { barChartData } = useCustomContext();
+  const { barChartData, entityDataToFetch } = useCustomContext();
 
   const options = {
     responsive: true,
@@ -43,7 +43,7 @@ const BarChart: FunctionComponent = () => {
         <Bar options={options} data={barChartData} />
       ) : (
         <h3 className="text-body text-center my-40 primary--text">
-          Chart will show here..
+          Results for {entityDataToFetch} will show here..
         </h3>
       )}
     </div>

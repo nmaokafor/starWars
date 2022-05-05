@@ -9,9 +9,7 @@ afterEach(cleanup);
 describe('SearchResults', () => {
   test('renders correctly', () => {
     render(<SearchResults />);
-    const text = screen.getByText(/Showing results for People/i);
     const BarChart = screen.getByTestId(/BarChart/i);
-    expect(text).toBeInTheDocument();
     expect(BarChart).toBeInTheDocument();
   });
 });
