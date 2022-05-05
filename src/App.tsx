@@ -5,6 +5,7 @@ import MainNavigation from './pages/MainNavigationPage/MainNavigationPage';
 
 import './App.scss';
 import SearchPage from './pages/SearchPage/SearchPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/view-star-wars-universe" element={<MainNavigation />}>
               <Route index element={<SearchPage />} />
             </Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>
