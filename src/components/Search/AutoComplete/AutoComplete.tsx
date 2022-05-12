@@ -1,22 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { useEffect, useState } from 'react';
-import SearchIcon from '../Svgs/SearchIcon';
-import { useSingleSearchQuery } from '../../hooks/queries/useSingleSearch';
-import { useCustomContext } from '../../CustomContextProvider';
-import SuggestionsList from '../SuggestionsList/SuggestionsList';
+import SearchIcon from '../../Svgs/SearchIcon';
+import { useSingleSearchQuery } from '../../../hooks/queries/useSingleSearch';
+import { useCustomContext } from '../../../CustomContextProvider';
+import SuggestionsList from '../../SuggestionsList/SuggestionsList';
 
 import styles from './AutoComplete.module.scss';
-import {
-  convertArrayOfDataToArrayOfNames,
-  extractBarChartData,
-} from '../../helpers/utils';
+import { convertArrayOfDataToArrayOfNames } from '../../../helpers/utils';
 
 const AutoComplete: FunctionComponent = React.memo(() => {
   const {
     entityDataToFetch,
     fetchWithWookiee,
     setBarChartData,
-    searchResultsArray,
+    setResultsQueryValue,
+    setSubmitButtonClicked,
   } = useCustomContext();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<Array<string>>([]);
@@ -25,39 +23,54 @@ const AutoComplete: FunctionComponent = React.memo(() => {
   const { data } = useSingleSearchQuery(searchValue);
 
   useEffect(() => {
-    if (searchResultsArray.length && searchValue) {
-      const extractedBarChartData = extractBarChartData(
-        searchResultsArray,
-        entityDataToFetch,
-        fetchWithWookiee,
-      );
+    if (data?.length > 0 && searchValue) {
       const arrayOfNames = convertArrayOfDataToArrayOfNames(
-        searchResultsArray,
+        data,
         fetchWithWookiee,
       );
 
       setSuggestions(arrayOfNames);
-      setBarChartData(extractedBarChartData);
     } else {
       setSuggestions([]);
-      setBarChartData({});
+      setBarChartData({
+        labels: [],
+        datasets: [],
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchResultsArray, data, searchValue]);
+  }, [data, searchValue]);
 
-  const handleClick = (e: { target: { innerText: any } }) => {
+  const handleMouseDown = (e: { target: { innerText: any } }) => {
     setSearchValue(e.target.innerText);
+    setResultsQueryValue(e.target.innerText);
+    setSubmitButtonClicked(true);
+    setShowSuggestions(false);
+  };
+
+  const handleSubmit = () => {
+    setResultsQueryValue(searchValue);
+    setSubmitButtonClicked(true);
     setShowSuggestions(false);
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchValue(value);
+    setSubmitButtonClicked(false);
     setShowSuggestions(true);
+    setResultsQueryValue('');
   };
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowSuggestions(false);
+  };
+
+  const handleKeyDown = (e: { key: string }) => {
+    if (e.key === 'Enter') {
+      setResultsQueryValue(searchValue);
+      setSubmitButtonClicked(true);
+      setShowSuggestions(false);
+    }
   };
 
   return (
@@ -67,11 +80,12 @@ const AutoComplete: FunctionComponent = React.memo(() => {
           className="text-field block"
           placeholder={`search for ${entityDataToFetch.toLowerCase()}`}
           type="search"
+          onKeyDown={handleKeyDown}
           onChange={handleSearch}
           value={searchValue}
           onBlur={handleBlur}
         />
-        <div className={styles.searchIcon}>
+        <div className={styles.searchIcon} onClick={handleSubmit}>
           <SearchIcon />
         </div>
       </div>
@@ -79,7 +93,7 @@ const AutoComplete: FunctionComponent = React.memo(() => {
         <SuggestionsList
           filteredSuggestions={suggestions}
           activeSuggestionIndex={0}
-          onClick={handleClick}
+          handleMouseDown={handleMouseDown}
         />
       )}
     </div>

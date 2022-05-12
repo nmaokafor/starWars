@@ -1,5 +1,5 @@
 import { render, screen, cleanup } from './testUtils';
-import AutoComplete from '../components/Search/AutoComplete';
+import AutoComplete from '../components/Search/AutoComplete/AutoComplete';
 
 jest.mock('../components/Svgs/SearchIcon', () => () => (
   <div data-testid="SearchIcon"></div>
