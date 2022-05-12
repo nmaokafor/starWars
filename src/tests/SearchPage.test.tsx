@@ -7,10 +7,10 @@ jest.mock('../components/Toggle/Toggle', () => () => (
 jest.mock('../components/EntitySelector', () => () => (
   <div data-testid="EntitySelector"></div>
 ));
-jest.mock('../components/Search/AutoComplete', () => () => (
+jest.mock('../components/Search/AutoComplete/AutoComplete', () => () => (
   <div data-testid="AutoComplete"></div>
 ));
-jest.mock('../components/Search/SearchResults', () => () => (
+jest.mock('../components/Search/SearchResults/SearchResults', () => () => (
   <div data-testid="SearchResults"></div>
 ));
 

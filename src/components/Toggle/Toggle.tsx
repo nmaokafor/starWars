@@ -3,11 +3,22 @@ import { useCustomContext } from '../../CustomContextProvider';
 import styles from './Toggle.module.scss';
 
 const Toggle: FunctionComponent = React.memo(() => {
-  const { fetchWithWookiee, setFetchWithWookiee } = useCustomContext();
+  const {
+    fetchWithWookiee,
+    setFetchWithWookiee,
+    setSubmitButtonClicked,
+    setBarChartData,
+  } = useCustomContext();
 
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFetchWithWookiee(!fetchWithWookiee);
+    setSubmitButtonClicked(false);
+    setBarChartData({
+      labels: [],
+      datasets: [],
+    });
   };
+
   return (
     <div className="d-flex justify-end align-center mb-8">
       <p className="text-caption mr-8">

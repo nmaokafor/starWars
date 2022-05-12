@@ -2,11 +2,21 @@ import React from 'react';
 import { useCustomContext } from '../CustomContextProvider';
 
 const EntitySelector = React.memo(() => {
-  const { entityDataToFetch, setEntityDataToFetch } = useCustomContext();
+  const {
+    entityDataToFetch,
+    setEntityDataToFetch,
+    setSubmitButtonClicked,
+    setBarChartData,
+  } = useCustomContext();
 
   const handleChange = (e: { target: { value: any } }) => {
     const { value } = e.target;
     setEntityDataToFetch(value);
+    setSubmitButtonClicked(false);
+    setBarChartData({
+      labels: [],
+      datasets: [],
+    });
   };
 
   return (

@@ -1,5 +1,5 @@
 import { render, screen, cleanup } from './testUtils';
-import SearchResults from '../components/Search/SearchResults';
+import SearchResults from '../components/Search/SearchResults/SearchResults';
 
 jest.mock('../components/Chart/BarChart', () => () => (
   <div data-testid="BarChart"></div>

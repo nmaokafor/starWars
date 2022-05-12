@@ -1,8 +1,8 @@
 import EntitySelector from '../../components/EntitySelector';
 import Logo from '../../assets/images/logo.png';
-import AutoComplete from '../../components/Search/AutoComplete';
+import AutoComplete from '../../components/Search/AutoComplete/AutoComplete';
 import ToggleSwitch from '../../components/Toggle/Toggle';
-import SearchResults from '../../components/Search/SearchResults';
+import SearchResults from '../../components/Search/SearchResults/SearchResults';
 
 const SearchPage: React.FunctionComponent = () => {
   return (

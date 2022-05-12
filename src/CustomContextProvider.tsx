@@ -22,16 +22,27 @@ type BarChartData = {
   datasets: Array<DataSetsType>;
 };
 
+type SearchResultsData = {
+  next: string;
+  previous: string;
+  results: any[];
+  rcwochuanaoc: any[];
+};
+
 interface CustomContextType {
   userName: string;
   setUserDetails: (isAuthenticated: string) => void;
   logOut: () => void;
   entityDataToFetch: string;
   setEntityDataToFetch: (entityDataToFetch: string) => void;
-  searchResultsArray: any[];
-  setSearchResultsArray: (searchResultsArray: any) => void;
+  searchResults: SearchResultsData;
+  setSearchResults: (searchResults: any) => void;
   fetchWithWookiee: boolean;
   setFetchWithWookiee: (fetchWithWookiee: boolean) => void;
+  resultsQueryValue: string;
+  setResultsQueryValue: (resultsQueryValue: string) => void;
+  submitButtonClicked: boolean;
+  setSubmitButtonClicked: (submitButtonClicked: boolean) => void;
   barChartData: any;
   setBarChartData: (barChartData: any) => void;
 }
@@ -43,10 +54,19 @@ export const CustomContext = createContext<CustomContextType>({
   logOut: () => null,
   entityDataToFetch: 'People',
   setEntityDataToFetch: (entityDataToFetch: string) => entityDataToFetch,
-  searchResultsArray: [],
-  setSearchResultsArray: (searchResultsArray: any) => searchResultsArray,
+  searchResults: {
+    next: '',
+    previous: '',
+    results: [],
+    rcwochuanaoc: [],
+  },
+  setSearchResults: (searchResults: SearchResultsData) => searchResults,
   fetchWithWookiee: false,
   setFetchWithWookiee: (fetchWithWookiee: boolean) => fetchWithWookiee,
+  resultsQueryValue: '',
+  setResultsQueryValue: (resultsQueryValue: string) => resultsQueryValue,
+  submitButtonClicked: false,
+  setSubmitButtonClicked: (submitButtonClicked: boolean) => submitButtonClicked,
   barChartData: {
     labels: [],
     datasets: [],
@@ -59,8 +79,15 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
 }) => {
   const [userName, setUserName] = useState<string>('');
   const [entityDataToFetch, setEntityDataToFetch] = useState<string>('People');
-  const [searchResultsArray, setSearchResultsArray] = useState([]);
+  const [searchResults, setSearchResults] = useState({
+    next: '',
+    previous: '',
+    results: [],
+    rcwochuanaoc: [],
+  });
   const [fetchWithWookiee, setFetchWithWookiee] = useState<boolean>(false);
+  const [resultsQueryValue, setResultsQueryValue] = useState<string>('');
+  const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
   const [barChartData, setBarChartData] = useState({
     labels: [],
     datasets: [],
@@ -93,10 +120,14 @@ export const CustomProvider: FunctionComponent<ContextProviderProps> = ({
         logOut,
         entityDataToFetch,
         setEntityDataToFetch,
-        searchResultsArray,
-        setSearchResultsArray,
+        searchResults,
+        setSearchResults,
         fetchWithWookiee,
         setFetchWithWookiee,
+        resultsQueryValue,
+        setResultsQueryValue,
+        submitButtonClicked,
+        setSubmitButtonClicked,
         barChartData,
         setBarChartData,
       }}
