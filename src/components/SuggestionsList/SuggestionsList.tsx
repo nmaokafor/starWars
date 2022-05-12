@@ -4,13 +4,13 @@ import styles from './SuggestionsList.module.scss';
 interface Props {
   filteredSuggestions: Array<any>;
   activeSuggestionIndex: number;
-  onClick: any;
+  handleMouseDown: any;
 }
 
 export const SuggestionsList: FunctionComponent<Props> = ({
   filteredSuggestions,
   activeSuggestionIndex,
-  onClick,
+  handleMouseDown,
 }) => {
   return filteredSuggestions.length ? (
     <ul className={styles.suggestions}>
@@ -20,7 +20,11 @@ export const SuggestionsList: FunctionComponent<Props> = ({
           className = 'suggestion-active';
         }
         return (
-          <li className={className} key={suggestion} onClick={onClick}>
+          <li
+            className={className}
+            key={`${suggestion}-${index}`}
+            onMouseDown={handleMouseDown}
+          >
             {suggestion}
           </li>
         );

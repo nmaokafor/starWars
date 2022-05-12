@@ -1,7 +1,7 @@
 import { render, screen, cleanup } from './testUtils';
 import SuggestionsList from '../components/SuggestionsList/SuggestionsList';
 
-const onClick = jest.fn();
+const handleMouseDown = jest.fn();
 
 afterEach(cleanup);
 describe('SuggestionsList', () => {
@@ -9,7 +9,7 @@ describe('SuggestionsList', () => {
     const Props = {
       filteredSuggestions: [],
       activeSuggestionIndex: 1,
-      onClick: onClick,
+      handleMouseDown: handleMouseDown,
     };
     render(<SuggestionsList {...Props} />);
     const text = screen.getByText(/No suggestions found/i);
@@ -20,7 +20,7 @@ describe('SuggestionsList', () => {
     const Props = {
       filteredSuggestions: ['Nma'],
       activeSuggestionIndex: 1,
-      onClick: onClick,
+      handleMouseDown: handleMouseDown,
     };
     render(<SuggestionsList {...Props} />);
     const text = screen.getByText(/Nma/i);
