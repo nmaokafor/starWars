@@ -37,13 +37,17 @@ As a first line of solution, this was handled using a global replace for the `wh
 
 I should also mention that for a larger api collection, recursively calling the endpoint is not the best course of action because the collection could be very large and this could take a really long time. It could also slow down the application and UX. However, for the purpose of this assignment, I chose to do this.
 
+### **Future Improvements**
+
+Using debounce for search.
+
 # Getting Started with this Application
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Starting up this application
 
-Clone this repository into your local directory using the git clone link at the top right of the page e.g git clone https://username@bitbucket.org/pvh-assignment/assignment-nmaokafo.git
+Clone this repository into your local directory using the git clone link at the top right of the page e.g git clone https://github.com/nmaokafor/starWars.git
 
 After cloning this app, change directory into the project directory using this command
 
