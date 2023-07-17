@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/CustomElements/CustomButton/CustomButton';
 import CustomInputFields from '../../components/CustomElements/CustomInputFields';
@@ -24,7 +24,7 @@ const Login = () => {
     password: '',
   });
 
-  const username = formValues.username;
+  const { username, password } = formValues;
   const { data, isLoading, refetch } = useLogin({ username });
 
   useEffect(() => {
@@ -58,10 +58,12 @@ const Login = () => {
       const loginDetails = data?.results;
       authenticateUser(loginDetails);
     }
+
     if (formSubmitted && data?.results?.length === 0) {
       setLoginErrorMessage('The combination of username and password is wrong');
     }
-  }, [formSubmitted, data, authenticateUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formSubmitted, data]);
 
   const togglePasswordField = () => {
     if (passwordType === 'password') {
@@ -83,7 +85,7 @@ const Login = () => {
     return;
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormSubmitted(true);
     refetch();
@@ -91,16 +93,18 @@ const Login = () => {
   };
 
   return (
-    <div className="login-form">
+    <form className="login-form" onSubmit={handleSubmit}>
       <h1 className="text-h1 mb-16">Login</h1>
 
       {loginErrorMessage && (
-        <p className={`text-caption ${styles.error}`}>{loginErrorMessage}</p>
+        <p className={`text-caption mb-8 ${styles.error}`}>
+          {loginErrorMessage}
+        </p>
       )}
       <CustomInputFields
         fieldType="text"
         name="username"
-        value={formValues.username}
+        value={username}
         handleChange={handleChange}
         placeholder="Luke Skywalker"
         leftIcon={<i className="ri-user-fill ri-lg"></i>}
@@ -108,7 +112,7 @@ const Login = () => {
       <CustomInputFields
         fieldType={passwordType}
         name="password"
-        value={formValues.password}
+        value={password}
         handleChange={handleChange}
         placeholder="********"
         leftIcon={
@@ -120,10 +124,10 @@ const Login = () => {
         }
         onClickLeftIcon={togglePasswordField}
       />
-      <Button onClick={handleSubmit} loading={isLoading} disabled={!validForm}>
+      <Button type="submit" loading={isLoading} disabled={!validForm}>
         Submit
       </Button>
-    </div>
+    </form>
   );
 };
 

@@ -3,13 +3,14 @@ import styles from './CustomButton.module.scss';
 
 type Props = {
   children: string;
-  onClick: any;
+  onClick?: (e: any) => void;
   disabled?: boolean;
   text?: boolean;
   loading?: boolean;
+  type?: 'submit' | 'reset' | 'button' | undefined;
 };
 const Button = (props: Props) => {
-  const { children, onClick, disabled, text, loading } = props;
+  const { children, onClick, disabled, text, loading, type } = props;
 
   return (
     <button
@@ -19,6 +20,7 @@ const Button = (props: Props) => {
         text-button`}
       disabled={disabled || loading}
       onClick={onClick}
+      type={type}
     >
       {loading ? <Spinner /> : children}
     </button>
